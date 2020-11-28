@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, ScrollView, TouchableOpacity, Keyboard } from 'react-native';
 
 export default function TodoApp() {
+   const [getText, setText] = useState("Dummy Text");
+   const [getList, setList] = useState([]); 
+
+   let addItem = () => {
+      console.log(getText);
+      setText('');
+   }
+
   return (
     <View style={styles.container}>
      <Text style={styles.title}> todo </Text>  
@@ -9,9 +17,15 @@ export default function TodoApp() {
       <TextInput 
         style={styles.textInput}
         placeholder="Enter Item"
+        onChangeText={text => setText(text)}
+        value={getText}
       /> 
-      <Button title='ADD' />
-     </View>   
+      <Button title='ADD' onPress={addItem} />
+     </View> 
+
+     <View>
+       <Text style={{ fontSize: 26 }}> {getText} </Text>  
+     </View>  
     </View>
   )  
 }
