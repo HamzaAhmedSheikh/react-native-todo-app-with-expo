@@ -23,6 +23,39 @@ export default function TodoApp() {
    //  setList( list => getList.filter(item => item.key !== itemKey ))
   }
 
+  const scrollView = (
+    <ScrollView style={styles.scrollview}>
+      {getList.map((item, index) => (
+        <TouchableOpacity         
+           key={item.key}
+           activeOpacity={0.7}
+           onPress={() => editItem(item)}
+        >
+          <View style={styles.scrollviewItem}>
+            <Text style={styles.scrollviewText}>
+              {" "}
+              {index + 1}# {item.data}{" "}
+            </Text>
+            <TouchableOpacity
+              onPress={() => removeItem(item.key)}
+              activeOpacity={0.4}
+            >
+              <View style={styles.crosstextContainer}>
+                <Text style={styles.crossText}> X </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
+  );
+
+  const emptyScrollView = (
+    <View style={{ paddingTop: 30 }}>
+      <Text style={{ fontStyle: 'italic', fontSize: 20, color: 'grey' }}> No ToDo Items! Hurray! </Text>
+    </View>     
+  );
+
   return (
     <View style={styles.container}>
      <Text style={styles.title}> todo </Text>  
@@ -48,28 +81,7 @@ export default function TodoApp() {
        <Text style={{ fontSize: 26 }}> {getText} </Text>  
      </View>  
 
-     <ScrollView style={styles.scrollview}> 
-       {getList.map((item, index) =>
-        <TouchableOpacity 
-          key={item.key}
-          activeOpacity={0.7}          
-        >
-         <View style={styles.scrollviewItem}>
-          <Text style={styles.scrollviewText}> {index + 1}#  {item.data}{" "} </Text> 
-            <TouchableOpacity
-              onPress={() => removeItem(item.key)}
-              activeOpacity={0.4}
-            >
-             <View style={styles.crosstextContainer}>
-                <Text style={styles.crossText}> X </Text>
-             </View>
-            </TouchableOpacity>
-
-
-         </View>               
-        </TouchableOpacity>
-      )}        
-     </ScrollView>
+     { getList.length <= 0 ? emptyScrollView : scrollView }     
     </View>
   )  
 }
