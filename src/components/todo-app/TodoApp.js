@@ -48,13 +48,13 @@ export default function TodoApp() {
      </View>  
 
      <ScrollView style={styles.scrollview}> 
-       {getList.map((item) =>
+       {getList.map((item, index) =>
         <TouchableOpacity 
           key={item.key}
           activeOpacity={0.7}          
         >
          <View style={styles.scrollviewItem}>
-          <Text style={styles.scrollviewText}> {item.data} </Text> 
+          <Text style={styles.scrollviewText}> {index + 1}#  {item.data}{" "} </Text> 
             <TouchableOpacity
               onPress={() => removeItem(item.key)}
               activeOpacity={0.4}
