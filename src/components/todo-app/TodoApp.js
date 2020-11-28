@@ -13,6 +13,15 @@ export default function TodoApp() {
       setText('');
    }
 
+   let removeItem = (itemKey) => {
+    // console.log(itemKey);
+    
+    let list = getList.filter(item => item.key !== itemKey)    
+    setList(list);
+    //  console.log('list ====>', list);
+   //  setList( list => getList.filter(item => item.key !== itemKey ))
+  }
+
   return (
     <View style={styles.container}>
      <Text style={styles.title}> todo </Text>  
@@ -30,12 +39,27 @@ export default function TodoApp() {
        <Text style={{ fontSize: 26 }}> {getText} </Text>  
      </View>  
 
-     <ScrollView style={styles.scrollview}>
-      {getList.map((item) =>
-          <View style={styles.scrollviewItem} key={item.key}>
-            <Text style={styles.scrollviewText}> {item.data} </Text> 
-          </View>
-      )}         
+     <ScrollView style={styles.scrollview}> 
+       {getList.map((item) =>
+        <TouchableOpacity 
+          key={item.key}
+          activeOpacity={0.7}          
+        >
+         <View style={styles.scrollviewItem}>
+          <Text style={styles.scrollviewText}> {item.data} </Text> 
+            <TouchableOpacity
+              onPress={() => removeItem(item.key)}
+              activeOpacity={0.4}
+            >
+             <View style={styles.crosstextContainer}>
+                <Text style={styles.crossText}> X </Text>
+             </View>
+            </TouchableOpacity>
+
+
+         </View>               
+        </TouchableOpacity>
+      )}        
      </ScrollView>
     </View>
   )  
@@ -84,6 +108,19 @@ const styles = StyleSheet.create({
   scrollviewText: {
     fontSize: 26,
     color: 'white',
+  },
+  crossText: {
+    fontSize: 16,
+    color: 'red',    
+    fontWeight: 'bold',
+  }, 
+  crosstextContainer: {
+    backgroundColor: 'lightgrey',
+    borderRadius: 50,
+    padding: 5,
+    width: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
 });
