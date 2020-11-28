@@ -3,11 +3,15 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
  const CustomButton = (props) => {
-    let btnColor = props.color != undefined ? props.color : 'navy'; 
+    if(props.disabled)
+      var btnColor = 'grey';
+    else
+      var btnColor = props.color != undefined ? props.color : 'navy'; 
    return (
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={props.onPressEvent}
+      disabled={props.disabled}
     >
      <View style={{ backgroundColor: btnColor, borderRadius: 50, padding: 10, paddingHorizontal: 20, }}>
       <Text style={{fontSize: props.textSize, color: props.textColor }}>

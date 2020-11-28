@@ -39,6 +39,7 @@ export default function TodoApp() {
            textSize={18}
            textColor='white'
            onPressEvent={addItem}
+           disabled={getText.length <= 0}
        />
       {/* <Button title='ADD' onPress={addItem} /> */}
      </View> 
