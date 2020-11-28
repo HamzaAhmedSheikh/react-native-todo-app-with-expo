@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, ScrollView, TouchableOpacity, Keyboard } from 'react-native';
+import CustomButton from './ButtonComponent';
 
 export default function TodoApp() {
    const [getText, setText] = useState('');
@@ -32,7 +33,14 @@ export default function TodoApp() {
         onChangeText={text => setText(text)}
         value={getText}
       /> 
-      <Button title='ADD' onPress={addItem} />
+       
+       <CustomButton
+           text="ADD"
+           textSize={18}
+           textColor='white'
+           onPressEvent={addItem}
+       />
+      {/* <Button title='ADD' onPress={addItem} /> */}
      </View> 
 
      <View>
