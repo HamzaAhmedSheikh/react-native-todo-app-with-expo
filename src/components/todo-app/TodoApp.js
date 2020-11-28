@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, ScrollView, TouchableOpacity, Keyboard } from 'react-native';
 
 export default function TodoApp() {
-   const [getText, setText] = useState("Dummy Text");
-   const [getList, setList] = useState([]); 
+   const [getText, setText] = useState('');
+   const [getList, setList] = useState(['item 1', 'item 2']); 
 
    let addItem = () => {
       console.log(getText);
+      setList([...getList, getText]);
       setText('');
    }
 
@@ -26,6 +27,14 @@ export default function TodoApp() {
      <View>
        <Text style={{ fontSize: 26 }}> {getText} </Text>  
      </View>  
+
+     <ScrollView>
+      {getList.map((item) =>
+          <View style={styles.scrollviewItem}>
+            <Text> {item} </Text> 
+          </View>
+      )}         
+     </ScrollView>
     </View>
   )  
 }
@@ -56,6 +65,16 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
     fontSize: 16,
     padding: 10,
+  },
+  scrollviewItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'orange',
+    alignSelf: 'center',
+    padding: 10,
+    margin: 5,
+    width: '90%',
+    borderRadius: 10,
   },
 
 });
