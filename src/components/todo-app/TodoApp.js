@@ -3,11 +3,13 @@ import { StyleSheet, Text, TextInput, View, Button, ScrollView, TouchableOpacity
 
 export default function TodoApp() {
    const [getText, setText] = useState('');
-   const [getList, setList] = useState(['item 1', 'item 2']); 
+   const [getList, setList] = useState([]); 
 
    let addItem = () => {
       console.log(getText);
-      setList([...getList, getText]);
+      setList([
+         ...getList,
+         { key: Math.random().toString(), data: getText } ]);
       setText('');
    }
 
@@ -28,10 +30,10 @@ export default function TodoApp() {
        <Text style={{ fontSize: 26 }}> {getText} </Text>  
      </View>  
 
-     <ScrollView>
+     <ScrollView style={styles.scrollview}>
       {getList.map((item) =>
-          <View style={styles.scrollviewItem}>
-            <Text> {item} </Text> 
+          <View style={styles.scrollviewItem} key={item.key}>
+            <Text style={styles.scrollviewText}> {item.data} </Text> 
           </View>
       )}         
      </ScrollView>
@@ -66,6 +68,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 10,
   },
+  scrollview: {
+    width: '100%',
+  },
   scrollviewItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -75,6 +80,10 @@ const styles = StyleSheet.create({
     margin: 5,
     width: '90%',
     borderRadius: 10,
+  },
+  scrollviewText: {
+    fontSize: 26,
+    color: 'white',
   },
 
 });
