@@ -1,5 +1,5 @@
 # react-native-todo-app-with-expo
-### This is a simple example of a "todo application" built using React Native.
+#### This is a simple example of a "todo application" built using React Native.
 
 ## requirements
 - Node.js
@@ -7,17 +7,17 @@
 
 ## to run 
 
-<span style="background-color:#eeeeee"> hello </span>
+- yarn install
 
-### or
+#### or
 
-> npm install
+- npm install
 
 ## to run
 
-expo-cli start
+- expo-cli start
 
-or
+#### or
 
-npm run start
+- npm run start
 
