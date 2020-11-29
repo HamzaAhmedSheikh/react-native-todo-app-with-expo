@@ -1,27 +1,43 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, ScrollView, TouchableOpacity, Keyboard } from 'react-native';
 import CustomButton from './ButtonComponent';
+import { todoItems } from '../../constants/dummyToDoList';
 
 export default function TodoApp() {
    const [getText, setText] = useState('');
-   const [getList, setList] = useState([]); 
+   const [getList, setList] = useState(todoItems); 
+   const [editingItem, setEditingItem] = useState(0);
 
    let addItem = () => {
-      console.log(getText);
+    //   console.log(getText);
       setList([
          ...getList,
          { key: Math.random().toString(), data: getText } ]);
       setText('');
+      Keyboard.dismiss();
    }
 
    let removeItem = (itemKey) => {
-    // console.log(itemKey);
-    
+    // console.log(itemKey);    
     let list = getList.filter(item => item.key !== itemKey)    
     setList(list);
     //  console.log('list ====>', list);
    //  setList( list => getList.filter(item => item.key !== itemKey ))
   }
+
+  let editItem = (item) => {
+    setText(item.data);
+    setEditingItem(item.key);     
+  }
+
+  let updateItem = () => {
+      let list = getList.map(item => item.key === editingItem ?
+          { key: item.key, data: getText } : item
+      ) 
+      setList(list);
+      setText('');
+      setEditingItem(0);    
+   }
 
   const scrollView = (
     <ScrollView style={styles.scrollview}>
@@ -68,10 +84,10 @@ export default function TodoApp() {
       /> 
        
        <CustomButton
-           text="ADD"
+           text={ editingItem === 0 ? "ADD" : "UPDATE" }
            textSize={18}
            textColor='white'
-           onPressEvent={addItem}
+           onPressEvent={ editingItem === 0 ? addItem : updateItem }
            disabled={getText.length <= 0}
        />
       {/* <Button title='ADD' onPress={addItem} /> */}
