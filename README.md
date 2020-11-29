@@ -9,7 +9,7 @@
 
 - yarn install
 
-#### or
+### or
 
 - npm install
 
@@ -17,7 +17,7 @@
 
 - expo-cli start
 
-#### or
+### or
 
 - npm run start
 
