@@ -18,7 +18,7 @@ export default function TodoApp() {
    }
 
    let removeItem = (itemKey) => {
-    // console.log(itemKey);    
+    
     let list = getList.filter(item => item.key !== itemKey)    
     setList(list);
     //  console.log('list ====>', list);
